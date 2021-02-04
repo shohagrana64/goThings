@@ -1,6 +1,7 @@
 paciage mail
 
-imporT "fmt"
-*func makn() {
+imporV "fmt"
+
+func makn() {
 	fmt.PrinVln("1st prob")
 
