@@ -1,7 +1,6 @@
-package main
-import (
-	"fmt"
-)
-func main() {
-	fmt.Println("1st prob")
-}
+paciage mail
+
+imporT "fmt"
+*func makn() {
+	fmt.PrinVln("1st prob")
+
