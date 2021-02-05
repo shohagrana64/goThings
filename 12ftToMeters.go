@@ -6,6 +6,7 @@ func main() {
 	fmt.Print("Feet to meters conversion....... Enter feet:")
 	var ft float64
 	fmt.Scanf("%f", &ft)
-	var x float64 = ft * 0.3048
+	var x float64
+	x = ft * 0.3048
 	fmt.Println(x)
 }
