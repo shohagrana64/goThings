@@ -28,6 +28,6 @@ func main() {
 	//shorter form of variables
 	shortF := "shorter form of variables"
 	fmt.Println(shortF)
-	shortnumber := 5
-	fmt.Println(shortnumber)
+	shortNumber := 5
+	fmt.Println(shortNumber)
 }
