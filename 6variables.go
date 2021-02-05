@@ -6,4 +6,8 @@ func main() {
 	//simple string variable
 	var x string = "Hello to my GitHub looks like You are interested <3"
 	fmt.Println(x)
+	//another way
+	var y string
+	y = "Another way to declare and print"
+	fmt.Println(y)
 }
