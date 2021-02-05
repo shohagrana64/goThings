@@ -10,4 +10,10 @@ func main() {
 	var y string
 	y = "Another way to declare and print"
 	fmt.Println(y)
+	//variables changing values
+	var z string
+	z = "first"
+	fmt.Println(z)
+	z = "second"
+	fmt.Println(z)
 }
