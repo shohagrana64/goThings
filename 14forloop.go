@@ -4,6 +4,7 @@ import "fmt"
 
 func main() {
 	//Go has only one loop =====> the for loop
+
 	//while loop using for loop
 	i := 1
 	for i <= 10 {
