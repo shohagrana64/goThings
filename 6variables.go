@@ -16,4 +16,9 @@ func main() {
 	fmt.Println(z)
 	z = "second"
 	fmt.Println(z)
+	//string concatenation
+	x = "first "
+	fmt.Println(x)
+	x = x + "second"
+	fmt.Println(x)
 }
