@@ -2,11 +2,11 @@ package main
 
 import "fmt"
 
-func zeroo(xPtr *int) {
+func zero2(xPtr *int) {
 	*xPtr = 0
 }
 func main() {
 	x := 5
-	zeroo(&x)
+	zero2(&x)
 	fmt.Println(x) // x is 0
 }
