@@ -20,6 +20,7 @@ func main() {
 	name, ok := elements["Un"]
 	fmt.Println(name, ok)
 
+	//if the element exists, then perform the print statement
 	if name, ok := elements["Un"]; ok {
 		fmt.Println(name, ok)
 	}
