@@ -38,4 +38,5 @@ func main() {
 	c.y = 5
 	fmt.Println(c.x, c.y, c.r)
 	fmt.Println(circleArea(c))
+	fmt.Println(c)
 }
