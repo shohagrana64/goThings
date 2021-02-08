@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	//create a map that contains both the name and the state:
-	elements := map[string]map[string]string{
+	elements := map[string]map[string]string{ // the type of map changed
 		"H": map[string]string{
 			"name":  "Hydrogen",
 			"state": "gas",
