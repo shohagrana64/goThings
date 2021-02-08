@@ -55,7 +55,7 @@ func main() {
 	fmt.Println(circleArea(c))
 	fmt.Println(c)
 
-	fmt.Println("Now rectangle:")
+	fmt.Println("Now area of rectangle:")
 	r := Rectangle{0, 0, 10, 10}
 	fmt.Println(r.area())
 }
