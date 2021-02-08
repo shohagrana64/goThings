@@ -33,6 +33,7 @@ type Rectangle struct {
 	x1, y1, x2, y2 float64
 }
 
+//area method for rectangle
 func (r *Rectangle) area() float64 {
 	l := distance(r.x1, r.y1, r.x1, r.y2)
 	w := distance(r.x1, r.y1, r.x2, r.y1)
