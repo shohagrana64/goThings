@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	//Easier better way for map creation
+	//Easier better way for map creation (Without make)
 	elements := map[string]string{
 		"H":  "Hydrogen",
 		"He": "Helium",
