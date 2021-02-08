@@ -5,7 +5,7 @@ import "fmt"
 func main() {
 	//Easier better way for map creation (Without make)
 	elements := map[string]string{
-		"H":  "Hydrogen",
+		"H":  "Hydrogen", //all commas
 		"He": "Helium",
 		"Li": "Lithium",
 		"Be": "Beryllium",
@@ -14,7 +14,7 @@ func main() {
 		"N":  "Nitrogen",
 		"O":  "Oxygen",
 		"F":  "Fluorine",
-		"Ne": "Neon",
+		"Ne": "Neon", //last also comma
 	}
 
 	//check if the element exists
