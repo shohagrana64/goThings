@@ -22,7 +22,7 @@ type Android struct {
 func main() {
 	a := new(Android)
 	a.Name = "Rana"
-	//both works
+	//both a.person.Talk() and a.Talk() work
 	a.Person.Talk()
 	a.Talk()
 
