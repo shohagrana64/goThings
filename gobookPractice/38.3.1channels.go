@@ -12,7 +12,7 @@ func digits(number int, dchnl chan int) {
 	}
 	close(dchnl)
 }
-func calcSquares(number int, squareop chan int) {
+func calcSquares2(number int, squareop chan int) {
 	sum := 0
 	dch := make(chan int)
 	go digits(number, dch)
@@ -22,7 +22,7 @@ func calcSquares(number int, squareop chan int) {
 	squareop <- sum
 }
 
-func calcCubes(number int, cubeop chan int) {
+func calcCubes2(number int, cubeop chan int) {
 	sum := 0
 	dch := make(chan int)
 	go digits(number, dch)
@@ -36,8 +36,8 @@ func main() {
 	number := 589
 	sqrch := make(chan int)
 	cubech := make(chan int)
-	go calcSquares(number, sqrch)
-	go calcCubes(number, cubech)
+	go calcSquares2(number, sqrch)
+	go calcCubes2(number, cubech)
 	squares, cubes := <-sqrch, <-cubech
 	fmt.Println("Final output", squares+cubes)
 }
