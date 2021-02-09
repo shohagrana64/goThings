@@ -39,5 +39,7 @@ func main() {
 	go calcSquares(number, sqrch)
 	go calcCubes(number, cubech)
 	squares, cubes := <-sqrch, <-cubech
+	fmt.Println("Square Sum:", squares)
+	fmt.Println("Cube Sum:", cubes)
 	fmt.Println("Final output", squares+cubes)
 }
