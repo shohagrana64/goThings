@@ -21,3 +21,13 @@ func main() {
 		fmt.Println("Received ", v, ok)
 	}
 }
+
+/*Alternate way:
+func main() {
+    ch := make(chan int)
+    go producer(ch)
+    for v := range ch {
+        fmt.Println("Received ",v)
+    }
+}
+*/
