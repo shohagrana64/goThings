@@ -43,5 +43,5 @@ func main() {
 	squares, cubes := <-sqrch, <-cubech
 	fmt.Println("Square Sum:", squares)
 	fmt.Println("Cube Sum:", cubes)
-	fmt.Println("Final output", squares+cubes)
+	fmt.Println("Final output:", squares+cubes)
 }
