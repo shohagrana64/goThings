@@ -30,6 +30,7 @@ func calcCubes2(number int, cubeop chan int) {
 		sum += digit * digit * digit
 	}
 	cubeop <- sum
+
 }
 
 func main() {
