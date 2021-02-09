@@ -5,12 +5,17 @@ import (
 	"time"
 )
 
-func pinger(c chan string) {
+func pinger1(c chan string) {
 	for i := 0; ; i++ {
 		c <- "ping"
 	}
 }
-func printer(c chan string) {
+func ponger1(c chan string) {
+	for i := 0; ; i++ {
+		c <- "pong"
+	}
+}
+func printer1(c chan string) {
 	for {
 		msg := <-c
 		fmt.Println(msg)
@@ -19,8 +24,9 @@ func printer(c chan string) {
 }
 func main() {
 	var c chan string = make(chan string)
-	go pinger(c)
-	go printer(c)
+	go pinger1(c)
+	go ponger1(c)
+	go printer1(c)
 	var input string
 	fmt.Scanln(&input)
 }
