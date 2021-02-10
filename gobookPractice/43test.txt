@@ -1,0 +1,2 @@
+yo my name is rana
+testing the read from files and folders in goLang
