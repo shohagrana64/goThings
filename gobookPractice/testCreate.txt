@@ -1,0 +1,1 @@
+testing WriteString to create a file in go
