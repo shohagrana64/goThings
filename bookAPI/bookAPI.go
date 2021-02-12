@@ -24,10 +24,12 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: homePage")
 }
 func returnAllBooks(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	fmt.Println("Endpoint Hit: returnAllBooks")
 	json.NewEncoder(w).Encode(Books)
 }
 func returnSingleBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	key := vars["id"]
 	for _, book := range Books {
@@ -70,10 +72,10 @@ func handleRequests() {
 
 	myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/books", returnAllBooks)
-	myRouter.HandleFunc("/book/{id}", updateBook).Methods("PUT")
-	myRouter.HandleFunc("/book", createNewBook).Methods("POST")
-	myRouter.HandleFunc("/book/{id}", deleteBook).Methods("DELETE")
-	myRouter.HandleFunc("/book/{id}", returnSingleBook)
+	myRouter.HandleFunc("/books/{id}", updateBook).Methods("PUT")
+	myRouter.HandleFunc("/books", createNewBook).Methods("POST")
+	myRouter.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
+	myRouter.HandleFunc("/books/{id}", returnSingleBook)
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 
