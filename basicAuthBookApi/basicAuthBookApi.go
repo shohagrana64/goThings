@@ -42,13 +42,13 @@ var (
 //	return tokenString,nil
 //}
 func homePage(w http.ResponseWriter, r *http.Request) {
-	validToken, err := GenerateJWT()
-	if err != nil {
-		fmt.Fprintf(w, err.Error())
-	}
+	//validToken, err := GenerateJWT()
+	//if err != nil {
+	//	fmt.Fprintf(w, err.Error())
+	//}
 
-	fmt.Fprintf(w, "Welcome to the HomePage! \nThe Token Generated:")
-	fmt.Fprintf(w, validToken)
+	fmt.Fprintf(w, "Welcome to the HomePage!")
+	//fmt.Fprintf(w, validToken)
 	fmt.Println("Endpoint Hit: homePage")
 }
 func returnAllBooks(w http.ResponseWriter, r *http.Request) {
