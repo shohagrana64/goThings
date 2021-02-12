@@ -39,6 +39,7 @@ func returnSingleBook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func createNewBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	reqBody, _ := ioutil.ReadAll(r.Body)
 	var book Book
 	json.Unmarshal(reqBody, &book)
@@ -46,6 +47,7 @@ func createNewBook(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(book)
 }
 func deleteBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	id := vars["id"]
 	for index, book := range Books {
@@ -55,6 +57,7 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func updateBook(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
 	id := vars["id"]
 	for index, book := range Books {
