@@ -18,8 +18,9 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 	}
 	client := &http.Client{}
-	req, _ := http.NewRequest("GET", "http://localhost:10000/", nil)
+	req, _ := http.NewRequest("GET", "http://localhost:10000/books", nil)
 	req.Header.Set("Token", validToken)
+	req.Header.Set("Content-Type", "application/json")
 	res, err := client.Do(req)
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
