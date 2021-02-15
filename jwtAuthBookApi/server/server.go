@@ -51,7 +51,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
-	fmt.Fprintf(w, "Welcome to the HomePage!\n The secret is secret.\n The Token:")
+	fmt.Fprintf(w, "Welcome to the HomePage!\n The secret is secret.\n")
 
 	fmt.Println("Endpoint Hit: homePage")
 }
