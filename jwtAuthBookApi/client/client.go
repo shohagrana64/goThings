@@ -29,7 +29,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, err.Error())
 	}
 	fmt.Fprintf(w, string(body))
-	//fmt.Fprintf(w, validToken)
+	fmt.Fprintf(w, validToken)
 	fmt.Println("Endpoint Hit: homePage")
 }
 func GenerateJWT() (string, error) {
