@@ -47,11 +47,12 @@ func GenerateJWT() (string, error) {
 }
 func homePage(w http.ResponseWriter, r *http.Request) {
 	validToken, err := GenerateJWT()
+	fmt.Fprintf(w, validToken)
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
 	fmt.Fprintf(w, "Welcome to the HomePage!\n The secret is secret.\n The Token:")
-	fmt.Fprintf(w, validToken)
+
 	fmt.Println("Endpoint Hit: homePage")
 }
 func returnAllBooks(w http.ResponseWriter, r *http.Request) {
