@@ -3,12 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	//jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"log"
 	"net/http"
-	//"time"
 )
 
 type Book struct {
@@ -25,30 +23,9 @@ var (
 	password = "123"
 )
 
-////var mySigningKey = os.Get("MY_JWT_TOKEN")
-//var mySigningKey = []byte("mysupersecretphrase")
-//func GenerateJWT() (string, error) {
-//	token := jwt.New(jwt.SigningMethodHS256)
-//	claims:= token.Claims.(jwt.MapClaims)
-//	claims["authorized"]=true
-//	claims["user"]="Shohag Rana"
-//	claims["exp"]=time.Now().Add(time.Minute *30).Unix()
-//	tokenString,err := token.SignedString(mySigningKey)
-//
-//	if err!=nil{
-//		fmt.Errorf("Something went wrong: %s", err.Error())
-//		return "", err
-//	}
-//	return tokenString,nil
-//}
 func homePage(w http.ResponseWriter, r *http.Request) {
-	//validToken, err := GenerateJWT()
-	//if err != nil {
-	//	fmt.Fprintf(w, err.Error())
-	//}
 
 	fmt.Fprintf(w, "Welcome to the HomePage!")
-	//fmt.Fprintf(w, validToken)
 	fmt.Println("Endpoint Hit: homePage")
 }
 func returnAllBooks(w http.ResponseWriter, r *http.Request) {
@@ -98,8 +75,8 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
-func handleRequests() {
 
+func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
 	myRouter.HandleFunc("/", homePage)
