@@ -108,9 +108,10 @@ func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
 	myRouter.HandleFunc("/", homePage)
+	myRouter.Handle("/books", basicAuthentication(createNewBook)).Methods("POST")
 	myRouter.Handle("/books", basicAuthentication(returnAllBooks))
 	myRouter.Handle("/books/{id}", basicAuthentication(updateBook)).Methods("PUT")
-	myRouter.Handle("/books", basicAuthentication(createNewBook)).Methods("POST")
+
 	myRouter.Handle("/books/{id}", basicAuthentication(deleteBook)).Methods("DELETE")
 	myRouter.Handle("/books/{id}", basicAuthentication(returnSingleBook))
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
