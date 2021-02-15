@@ -102,6 +102,35 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		u, p, ok := r.BasicAuth()
+		if !ok {
+			fmt.Println("Error parsing basic auth")
+			w.WriteHeader(401)
+			fmt.Fprintf(w, "Error parsing basic auth")
+			return
+		}
+		if u != username {
+			fmt.Printf("Username provided is incorrect: %s\n", u)
+			w.WriteHeader(401)
+			fmt.Fprintf(w, "Username provided is incorrect")
+			return
+		}
+		if p != password {
+			fmt.Printf("Password provided is incorrect: %s\n", p)
+			w.WriteHeader(401)
+			fmt.Fprintf(w, "Password provided is incorrect")
+			return
+		}
+		fmt.Printf("Username: %s\n", u)
+		fmt.Printf("Password: %s\n", p)
+		w.WriteHeader(200)
+		endpoint(w, r)
+		return
+	})
+}
 func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -127,7 +156,7 @@ func handleRequests() {
 
 	myRouter := mux.NewRouter().StrictSlash(true)
 
-	myRouter.Handle("/", isAuthorized(homePage))
+	myRouter.Handle("/", basicAuthentication(homePage))
 	myRouter.Handle("/books", isAuthorized(createNewBook)).Methods("POST")
 	myRouter.Handle("/books", isAuthorized(returnAllBooks))
 	myRouter.Handle("/books/{id}", isAuthorized(updateBook)).Methods("PUT")
