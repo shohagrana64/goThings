@@ -84,16 +84,19 @@ func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http
 		if !ok {
 			fmt.Println("Error parsing basic auth")
 			w.WriteHeader(401)
+			fmt.Fprintf(w, "Error parsing basic auth")
 			return
 		}
 		if u != username {
 			fmt.Printf("Username provided is incorrect: %s\n", u)
 			w.WriteHeader(401)
+			fmt.Fprintf(w, "Username provided is incorrect")
 			return
 		}
 		if p != password {
 			fmt.Printf("Password provided is incorrect: %s\n", p)
 			w.WriteHeader(401)
+			fmt.Fprintf(w, "Password provided is incorrect")
 			return
 		}
 		fmt.Printf("Username: %s\n", u)
