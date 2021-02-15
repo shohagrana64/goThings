@@ -67,7 +67,7 @@ func returnSingleBook(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func createNewBook(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	//w.Header().Set("Content-Type", "application/json")
 	reqBody, _ := ioutil.ReadAll(r.Body)
 	var book Book
 	json.Unmarshal(reqBody, &book)
@@ -103,9 +103,9 @@ func handleRequests() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 
 	myRouter.HandleFunc("/", homePage)
+	myRouter.HandleFunc("/books", createNewBook).Methods("POST")
 	myRouter.HandleFunc("/books", returnAllBooks)
 	myRouter.HandleFunc("/books/{id}", updateBook).Methods("PUT")
-	myRouter.HandleFunc("/books", createNewBook).Methods("POST")
 	myRouter.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
 	myRouter.HandleFunc("/books/{id}", returnSingleBook)
 	log.Fatal(http.ListenAndServe(":10000", myRouter))

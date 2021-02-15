@@ -25,28 +25,7 @@ var (
 	password = "123"
 )
 
-////var mySigningKey = os.Get("MY_JWT_TOKEN")
-//var mySigningKey = []byte("mysupersecretphrase")
-//func GenerateJWT() (string, error) {
-//	token := jwt.New(jwt.SigningMethodHS256)
-//	claims:= token.Claims.(jwt.MapClaims)
-//	claims["authorized"]=true
-//	claims["user"]="Shohag Rana"
-//	claims["exp"]=time.Now().Add(time.Minute *30).Unix()
-//	tokenString,err := token.SignedString(mySigningKey)
-//
-//	if err!=nil{
-//		fmt.Errorf("Something went wrong: %s", err.Error())
-//		return "", err
-//	}
-//	return tokenString,nil
-//}
 func homePage(w http.ResponseWriter, r *http.Request) {
-	//validToken, err := GenerateJWT()
-	//if err != nil {
-	//	fmt.Fprintf(w, err.Error())
-	//}
-
 	fmt.Fprintf(w, "Welcome to the HomePage!")
 	//fmt.Fprintf(w, validToken)
 	fmt.Println("Endpoint Hit: homePage")
@@ -98,16 +77,42 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		u, p, ok := r.BasicAuth()
+		if !ok {
+			fmt.Println("Error parsing basic auth")
+			w.WriteHeader(401)
+			return
+		}
+		if u != username {
+			fmt.Printf("Username provided is incorrect: %s\n", u)
+			w.WriteHeader(401)
+			return
+		}
+		if p != password {
+			fmt.Printf("Password provided is incorrect: %s\n", p)
+			w.WriteHeader(401)
+			return
+		}
+		fmt.Printf("Username: %s\n", u)
+		fmt.Printf("Password: %s\n", p)
+		w.WriteHeader(200)
+		endpoint(w, r)
+		return
+	})
+}
 func handleRequests() {
 
 	myRouter := mux.NewRouter().StrictSlash(true)
 
 	myRouter.HandleFunc("/", homePage)
-	myRouter.HandleFunc("/books", returnAllBooks)
-	myRouter.HandleFunc("/books/{id}", updateBook).Methods("PUT")
-	myRouter.HandleFunc("/books", createNewBook).Methods("POST")
-	myRouter.HandleFunc("/books/{id}", deleteBook).Methods("DELETE")
-	myRouter.HandleFunc("/books/{id}", returnSingleBook)
+	myRouter.Handle("/books", basicAuthentication(returnAllBooks))
+	myRouter.Handle("/books/{id}", basicAuthentication(updateBook)).Methods("PUT")
+	myRouter.Handle("/books", basicAuthentication(createNewBook)).Methods("POST")
+	myRouter.Handle("/books/{id}", basicAuthentication(deleteBook)).Methods("DELETE")
+	myRouter.Handle("/books/{id}", basicAuthentication(returnSingleBook))
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 
