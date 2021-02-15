@@ -50,7 +50,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 	}
-	fmt.Fprintf(w, "Welcome to the HomePage!")
+	fmt.Fprintf(w, "Welcome to the HomePage!\n The secret is secret.\n The Token:")
 	fmt.Fprintf(w, validToken)
 	fmt.Println("Endpoint Hit: homePage")
 }
@@ -105,7 +105,18 @@ func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.Handle
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		if r.Header["Token"] != nil {
-
+			token, err := jwt.Parse(r.Header["Token"][0], func(token *jwt.Token) (interface{}, error) {
+				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+					return nil, fmt.Errorf("There was an error")
+				}
+				return mySigningKey, nil
+			})
+			if err != nil {
+				fmt.Fprintf(w, err.Error())
+			}
+			if token.Valid {
+				endpoint(w, r)
+			}
 		} else {
 			fmt.Fprintf(w, "Not Authorized")
 		}
