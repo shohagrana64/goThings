@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
+	"strings"
 	"time"
 
 	//jwt "github.com/dgrijalva/jwt-go"
@@ -133,9 +134,13 @@ func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http
 }
 func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
 		w.Header().Set("Content-Type", "application/json")
-		if r.Header["Token"] != nil {
-			token, err := jwt.Parse(r.Header["Token"][0], func(token *jwt.Token) (interface{}, error) {
+		processedToken := r.Header["Authorization"][0]
+		processedTokens := strings.Split(processedToken, " ")
+		//fmt.Fprintf(w, processedToken)
+		if r.Header["Authorization"] != nil {
+			token, err := jwt.Parse(processedTokens[1], func(token *jwt.Token) (interface{}, error) {
 				if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 					return nil, fmt.Errorf("There was an error")
 				}
