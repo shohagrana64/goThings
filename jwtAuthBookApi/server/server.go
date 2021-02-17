@@ -172,7 +172,7 @@ func handleRequests() {
 
 func main() {
 	Books = []Book{
-		Book{Id: "1", Title: "Test title1", Author: "Shohag Rana", Genre: "Action", Desc: "Test Description1"},
+		Book{Id: "1", Title: "Test title1", Author: "Shohag Rana", Genre: "Mystery", Desc: "Test Description1"},
 		Book{Id: "2", Title: "Test title2", Author: "Sakib Al Amin", Genre: "Action", Desc: "Test Description2"},
 	}
 	handleRequests()
