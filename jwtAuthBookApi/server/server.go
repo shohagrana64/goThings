@@ -165,7 +165,6 @@ func handleRequests() {
 	myRouter.Handle("/books", isAuthorized(createNewBook)).Methods("POST")
 	myRouter.Handle("/books", isAuthorized(returnAllBooks))
 	myRouter.Handle("/books/{id}", isAuthorized(updateBook)).Methods("PUT")
-
 	myRouter.Handle("/books/{id}", isAuthorized(deleteBook)).Methods("DELETE")
 	myRouter.Handle("/books/{id}", isAuthorized(returnSingleBook))
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
