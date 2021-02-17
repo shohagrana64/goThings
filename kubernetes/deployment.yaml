@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookapi
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: bookapi
+  template:
+    metadata:
+      labels:
+        app: bookapi
+    spec:
+      containers:
+        - name: bookapi
+          image: shohagrana64/bookapi:latest
+          ports:
+            - containerPort: 80

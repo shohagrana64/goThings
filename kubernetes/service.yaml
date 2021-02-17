@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookapi-svc
+  labels:
+    app: bookapi
+spec:
+  type: NodePort
+  ports:
+    - port: 10000
+      nodePort: 30080
+  selector:
+    app: bookapi
