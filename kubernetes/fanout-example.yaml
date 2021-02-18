@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: simple-fanout-example
+  annotations:
+spec:
+  rules:
+    - host: myapp.com
+      http:
+        paths:
+          - path: /analytics
+            backend:
+              serviceName: analytics-service
+              servivePort: 3000
+          - path: /shopping
+              backend:
+                serviceName: shopping-service
+                servivePort: 8080
