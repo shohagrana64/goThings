@@ -4,10 +4,12 @@ metadata:
   name: bookapi-svc
   labels:
     app: bookapi
+#    tier:
 spec:
-  type: NodePort
+  type: NodePort #ClusterIp / LoadBalancer
   ports:
     - port: 10000
       nodePort: 30080
   selector:
     app: bookapi
+#    tier:
