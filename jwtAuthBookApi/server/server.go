@@ -29,10 +29,10 @@ var (
 	password = "123"
 )
 
-//set environment variable first. This can be done by:
+// set environment variable first. This can be done by:
 // export MY_JWT_TOKEN="icecreamKhabo"
-//then use the following command. This will ensure security of the signing key.
-//var mySigningKey = os.Get("MY_JWT_TOKEN")
+// then use the following command. This will ensure security of the signing key.
+// var mySigningKey = os.Get("MY_JWT_TOKEN")
 var mySigningKey = []byte("icecreamKhabo")
 
 func GenerateJWT() (string, error) {
