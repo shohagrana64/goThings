@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: myapp-secret-tls
-  namespace: default
+  namespace: default #must be in the same namespace as the ingress component
 data:
-  tls.crt: base64 ecnoded cert
-  tls.key: base64 encoded key
+  tls.crt: base64 ecnoded cert #put content here... Not the path/location
+  tls.key: base64 encoded key #put content here... Not the path/location
 type: kubernetes.io/tls
