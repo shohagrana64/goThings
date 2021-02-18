@@ -7,13 +7,22 @@ spec:
   selector:
     matchLabels:
       app: bookapi
+#      role:
+#      tier:
   template:
     metadata:
       labels:
         app: bookapi
+#        role:
+#        tier:
     spec:
       containers:
         - name: bookapi
           image: shohagrana64/bookapi:latest
+#          resources:
+#            requests:
+#              cpu: 100m
+#              memory: 100Mi
+
           ports:
             - containerPort: 80
