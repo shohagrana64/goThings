@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchLabels:
+    matchLabels:  #matchLabels supports replicaSets,Deployments, Jobs, DaemonSet # No matchLabels on older resources such as ReplicationControllers and Services.
       app: bookapi
 #      role:
 #      tier:
