@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v 1
 kind: ReplicationController
 metadata:
   name: example-rc
