@@ -6,6 +6,7 @@ spec:
   replicas: 3
   selector:
     app: example-app
+    #template is exactly the same as the pod manifest file (except api version and kind)
   template:
     metadata:
       name: example-pod
