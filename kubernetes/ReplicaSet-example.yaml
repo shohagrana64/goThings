@@ -1,17 +1,22 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: example-rc
+  name: example-rs
+  #labels:
 spec:
   replicas: 3
   selector:
-    app: example-app
+    matchLabels:
+      app: example-app
+    matchExpressions:
+      - {key: tier, operator: In, values:[frontend]}
     #template is exactly the same as the pod manifest file (except api version and kind)
   template:
     metadata:
       name: example-pod
       labels:
         app: example-app
+        tier: frontend
     spec:
       containers:
         - name: example-container
