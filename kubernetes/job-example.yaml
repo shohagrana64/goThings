@@ -15,3 +15,11 @@ spec:
           - "-c"
           - "for i in 9 8 7 6 5 4 3 2 1 ; do echo $i ; done"
       restartPolicy: never
+
+      #kubectl create -f job-example.yaml
+      #kubectl get jobs
+      #kubectl get pods
+      #kubectl logs podName
+
+      #kubectl describe jobs countdown
+      #kubectl delete jobs countdown
