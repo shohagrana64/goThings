@@ -16,4 +16,14 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: fluentd
-          image: k8s.gcr
+          image: k8s.gcr.io/nginx-slim:0.8
+          ports:
+          - containerPort: 80
+            name: web
+          volumeMounts:
+          - name: www
+            mountPath: /usr/share/niginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
