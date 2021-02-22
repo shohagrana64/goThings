@@ -3,10 +3,14 @@ kind: DaemonSet
 metadata:
   name: fluentd-ds
 spec:
-  rules:
-    - host: dashboard.com
-      http:
-        paths:
-          - backend:
-              serviceName: kubernetes-dashboard
-              servicePort: 80
+  template:
+    metadata:
+      labels:
+      name: fluentd
+    spec:
+      containers:
+        - name: fluentd
+          image: gcr.io/google-containers/fleuntd-elasticsearch:5.0.0
+  selector:
+    matchLabels:
+      name: fluentd
