@@ -25,5 +25,7 @@ spec:
 #          name: mypod
 #    volumes:
 #      - name: mypd
+#         configMap:
+#           name: bb-configmap
 #        persistentVolumeClaim:
 #          claimName: pvc-name #####This has to be the same name as the file given here.
