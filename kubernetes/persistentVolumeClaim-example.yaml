@@ -10,3 +10,20 @@ spec:
   resources:
     requests:
       storage: 10Gi
+
+  #inside pod:
+#  apiVersion: v1
+#  kind: pod
+#  metadata:
+#    name: mypod
+#  spec:
+#    containers:
+#      - name: myfrontend
+#        image: nginx
+#        volumeMounts:
+#        - mountPath: "/var/www/html"
+#          name: mypod
+#    volumes:
+#      - name: mypd
+#        persistentVolumeClaim:
+#          claimName: pvc-name #####This has to be the same name as the file given here.
