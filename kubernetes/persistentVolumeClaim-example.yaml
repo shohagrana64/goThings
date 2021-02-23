@@ -3,13 +3,13 @@ kind: PersistentVolumeClaim
 metadata:
   name: pvc-name
 spec:
-  storageClassName: manual
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 10Gi
+  storageClassName: storage-class-name
 
   #inside pod:
 #  apiVersion: v1
