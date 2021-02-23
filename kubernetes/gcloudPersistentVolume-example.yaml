@@ -1,0 +1,15 @@
+#persistent volume for Google cloud Storage
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-name
+  labels:
+    failure-domain.beta.kubernetes.io/zone: us-central-a__us-central1-b
+spec:
+  capacity:
+    storage: 400Gi
+  accessModes:
+    - ReadWriteOnce
+  gcePersistentDisk:
+    pdName: my-data-disk #google cloud parameters
+    fsType: ext4
