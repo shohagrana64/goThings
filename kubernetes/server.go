@@ -103,6 +103,8 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+// This provides BasicAuthentication which has username=abc and pass=123
 func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -132,6 +134,8 @@ func basicAuthentication(endpoint func(http.ResponseWriter, *http.Request)) http
 		return
 	})
 }
+
+//This is for JWT Authentication which provides the Bearer Token
 func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
