@@ -32,6 +32,7 @@ var (
 //var mySigningKey = os.Get("MY_JWT_TOKEN")
 var mySigningKey = []byte("icecreamKhabo")
 
+//function to generate JWT Token
 func GenerateJWT() (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
@@ -46,6 +47,8 @@ func GenerateJWT() (string, error) {
 	}
 	return tokenString, nil
 }
+
+//generates JWT token and needs basic auth where user=abc, pass=123
 func homePage(w http.ResponseWriter, r *http.Request) {
 	validToken, err := GenerateJWT()
 	fmt.Fprintf(w, validToken)
@@ -56,11 +59,15 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("Endpoint Hit: homePage")
 }
+
+//returns all the books in the array
 func returnAllBooks(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Println("Endpoint Hit: returnAllBooks")
 	json.NewEncoder(w).Encode(Books)
 }
+
+//returns a single book (Search by ID)
 func returnSingleBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
@@ -71,6 +78,8 @@ func returnSingleBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+//create new book
 func createNewBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	reqBody, _ := ioutil.ReadAll(r.Body)
@@ -79,6 +88,8 @@ func createNewBook(w http.ResponseWriter, r *http.Request) {
 	Books = append(Books, book)
 	json.NewEncoder(w).Encode(book)
 }
+
+//delete from the array
 func deleteBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
@@ -89,6 +100,8 @@ func deleteBook(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+//update existing book
 func updateBook(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	vars := mux.Vars(r)
