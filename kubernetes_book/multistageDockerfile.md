@@ -1,3 +1,4 @@
+#This file will be only 20mb, the normal file will be more than 500mb
 # STAGE 1: Build
 FROM golang:1.11-alpine AS build    
 # Install Node and NPM
