@@ -8,7 +8,7 @@ spec:
       name: kuard
       livenessProbe:
         httpGet:
-          path: /healthy
+          path: /healthy #runs an HTTP request against the /healthy path on our container.
           port: 8080
         initialDelaySeconds: 5
         timeoutSeconds: 1
