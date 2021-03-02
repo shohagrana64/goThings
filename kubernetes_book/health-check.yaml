@@ -16,5 +16,5 @@ spec:
         failureThreshold: 3
       ports:
         - containerPort: 8080
-        name: http
-        protocol: TCP
+          name: http
+          protocol: TCP
