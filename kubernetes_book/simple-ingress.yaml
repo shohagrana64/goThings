@@ -6,3 +6,7 @@ spec:
   backend:
     serviceName: alpaca
     servicePort: 8080
+
+    # kubectl apply -f simple-ingress.yaml
+    # kubectl get ingress
+    # kubectl describe ingress simple-ingress
