@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: example-rs
+  name: bookapi-rs
   #labels:
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: example-app
-    matchExpressions:
-      - {key: tier, operator: In, values:[frontend]}
+      app: bookapi
+#    matchExpressions:
+#      - {key: tier, operator: In, values:[frontend]}
     #template is exactly the same as the pod manifest file (except api version and kind)
   template:
     metadata:
-      name: example-pod
+      name: bookapi-pod
       labels:
-        app: example-app
-        tier: frontend
+        app: bookapi
+#        tier: frontend
     spec:
       containers:
-        - name: example-container
-          image: example
+        - name: bookapi
+          image: shohagrana64/bookapi:latest
           ports:
             - containerPort: 80
