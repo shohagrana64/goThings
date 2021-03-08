@@ -15,6 +15,9 @@ spec:
         app: bookapi
 #        role:
 #        tier:
+#      annotation:
+#        kubernetes.io/change-cause: "Update to green kuard"
+
     spec:
       containers:
         - name: bookapi
