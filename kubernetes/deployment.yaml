@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 2
   selector:
-    matchLabels:  #matchLabels supports replicaSets,Deployments, Jobs, DaemonSet # No matchLabels on older resources such as ReplicationControllers and Services.
+    matchLabels:  # matchLabels supports replicaSets,Deployments, Jobs, DaemonSet # No matchLabels on older resources such as ReplicationControllers and Services.
       app: bookapi
 #      role:
 #      tier:
@@ -15,8 +15,9 @@ spec:
         app: bookapi
 #        role:
 #        tier:
-#      annotation:
+#      annotation:  #this is used when new version of app is going to be published
 #        kubernetes.io/change-cause: "Update to green kuard"
+#  minReadySeconds: 60 # this is the minimum amount of time to wait after seeing a pod become healthy before moving on to the next pod. this is inside spec:
 
     spec:
       containers:
