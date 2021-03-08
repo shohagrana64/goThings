@@ -18,6 +18,7 @@ spec:
 #      annotation:  #this is used when new version of app is going to be published
 #        kubernetes.io/change-cause: "Update to green kuard"
 #  minReadySeconds: 60 # this is the minimum amount of time to wait after seeing a pod become healthy before moving on to the next pod. this is inside spec:
+#  progressDeadlineSeconds: 600 # This sets the progress deadline to 10 minutes. If any particular stage in the rollout fails to progress in 10 minutes, then the deployment is marked as failed, and all attempts to move the deployment forward are halted.
 
     spec:
       containers:
