@@ -14,7 +14,7 @@ spec:
           - "bin/bash"
           - "-c"
           - "for i in 9 8 7 6 5 4 3 2 1 ; do echo $i ; done"
-      restartPolicy: never
+      restartPolicy: never #OnFailure is better to use since it doesn't create a lot of junk in the cluster.
 
       #kubectl create -f job-example.yaml
       #kubectl get jobs
