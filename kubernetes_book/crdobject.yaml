@@ -1,0 +1,12 @@
+apiVersion: beta.kuar.com/v1
+kind: LoadTest
+metadata:
+  name: my-loadtest
+spec:
+  service: my-service
+  scheme: https
+  requestsPerSecond: 1000
+  paths:
+  - /index.html
+  - /login.html
+  - /shares/my-shares/
