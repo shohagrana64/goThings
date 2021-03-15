@@ -108,12 +108,29 @@ func createDeployment() {
 	}
 	fmt.Printf("Created deployment %q.\n", result.GetObjectMeta().GetName())
 }
+func deleteDeployment(args []string) {
+	//var clientset kubernetes.Interface
+	//clientset = CreateClient()
+
+	deploymentsClient := clientset.AppsV1().Deployments(apiv1.NamespaceDefault)
+
+	deletePolicy := metav1.DeletePropagationForeground
+
+	for _, deployName := range args {
+		if err := deploymentsClient.Delete(context.TODO(), deployName, metav1.DeleteOptions{
+			PropagationPolicy: &deletePolicy,
+		}); err != nil {
+			panic(err)
+		}
+		fmt.Printf("Deleted deployment : %s\n", deployName)
+	}
+}
 
 func main() {
 	clientset = createClientSet()
 	createDeployment()
 	getDeployments()
-
+	deleteDeployment([]string{"bookapi-deployment-go"})
 	// Update Deployment
 	prompt()
 	fmt.Println("Updating deployment...")
