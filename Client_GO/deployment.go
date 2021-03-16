@@ -62,6 +62,17 @@ func getDeployments() {
 		fmt.Printf("%s (%d replicas)\n", item.Name, *item.Spec.Replicas)
 	}
 }
+func getPods() {
+	list, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	for _, item := range list.Items {
+		fmt.Printf("%s  \n", item.Name)
+	}
+	fmt.Printf("Total pods = %d \n", len(list.Items))
+}
 func createDeployment() {
 	deploymentsClient := clientset.AppsV1().Deployments(apiv1.NamespaceDefault)
 	//clientset := createClientSet()
@@ -158,6 +169,9 @@ func main() {
 	fmt.Println("Press enter to update the number of replicas to 1")
 	prompt()
 	updateDeployment()
+	fmt.Println("Press enter to get pods")
+	prompt()
+	getPods()
 	fmt.Println("Press enter to delete the bookapi-deployment-go")
 	prompt()
 	deleteDeployment([]string{"bookapi-deployment-go"})
