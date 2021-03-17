@@ -5,16 +5,15 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"k8s.io/client-go/util/retry"
-	"os"
-	"path/filepath"
-
 	appsv1 "k8s.io/api/apps/v1"
 	apiv1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/util/homedir"
+	"k8s.io/client-go/util/retry"
+	"os"
+	"path/filepath"
 	//
 	// Uncomment to load all auth plugins
 	// _ "k8s.io/client-go/plugin/pkg/client/auth"
@@ -63,7 +62,9 @@ func getDeployments() {
 	}
 }
 func getPods() {
-	list, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+	list, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{
+		//LabelSelector: "app=bookapi",
+	})
 	if err != nil {
 		fmt.Println(err)
 		return
