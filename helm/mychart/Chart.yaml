@@ -1,0 +1,8 @@
+apiVersion: v2
+name: mychart
+description: A Helm chart for deploying a bookapi server in Kubernetes
+type: application
+
+version: 0.1.0
+
+appVersion: "0.1.0"

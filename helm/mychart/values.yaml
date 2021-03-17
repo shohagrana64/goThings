@@ -1,0 +1,18 @@
+labels:
+  app: bookapi-helm
+
+deployment:
+  replicas: 3
+  container:
+    name: bookapi-helm
+    image: shohagrana64/bookapi:latest
+    port: 80
+service:
+  name: bookapi-svc-helm
+  spec:
+    type: NodePort
+    ports:
+      port: 10000
+      nodePort: 30081
+    selector:
+      app: bookapi
