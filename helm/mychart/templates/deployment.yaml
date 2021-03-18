@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ $.Release.Name }}-deployment
   labels:
-      {{/*app: {{ $.Values.labels.app | quote}} */}}
+      {{- /*app: {{ $.Values.labels.app | quote}} */}}
     {{- include "labels" . | nindent 4}}
 
 spec:
