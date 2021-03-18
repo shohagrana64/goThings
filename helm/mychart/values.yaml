@@ -1,6 +1,5 @@
 labels:
   app: bookapi-helm
-
 deployment:
   replicas: 3
   container:
