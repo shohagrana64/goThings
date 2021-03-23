@@ -1,6 +1,6 @@
 
 # Start from the latest golang base image
-FROM golang:latest
+FROM golang:latest as builder
 
 # Add Maintainer Info
 LABEL maintainer="Shohag Rana <shohagrana64@gmail.com>"
@@ -17,8 +17,13 @@ RUN go mod download
 # Copy the source from the current directory to the Working Directory inside the container
 COPY . .
 
-# Build the Go app
-RUN go build -o main .
+# Build binaries from the source
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+############# New Stage ################
+FROM alpine:latest
+WORKDIR /root/
+COPY --from=builder /api/main .
 
 # Expose port 8080 to the outside world
 EXPOSE 8080

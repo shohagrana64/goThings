@@ -9,6 +9,8 @@ import (
 
 	//jwt "github.com/dgrijalva/jwt-go"
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -27,6 +29,19 @@ var Books []Book
 var (
 	username = "abc"
 	password = "123"
+)
+var (
+	version = prometheus.NewGauge(prometheus.GaugeOpts{
+		Name: "version",
+		Help: "Version information about this binary",
+		ConstLabels: map[string]string{
+			"version": "v0.1.0",
+		},
+	})
+	httpRequestsTotal = prometheus.NewCounterVec(prometheus.CounterOpts{
+		Name: "http_requests_total",
+		Help: "Count of all HTTP requests",
+	}, []string{"code", "method"})
 )
 
 // set environment variable first. This can be done by:
@@ -161,15 +176,17 @@ func isAuthorized(endpoint func(http.ResponseWriter, *http.Request)) http.Handle
 	})
 }
 func handleRequests() {
-
+	r := prometheus.NewRegistry()
+	r.MustRegister(httpRequestsTotal)
+	r.MustRegister(version)
 	myRouter := mux.NewRouter().StrictSlash(true)
-
-	myRouter.Handle("/", basicAuthentication(homePage))
-	myRouter.Handle("/books", isAuthorized(createNewBook)).Methods("POST")
-	myRouter.Handle("/books", isAuthorized(returnAllBooks))
-	myRouter.Handle("/books/{id}", isAuthorized(updateBook)).Methods("PUT")
-	myRouter.Handle("/books/{id}", isAuthorized(deleteBook)).Methods("DELETE")
-	myRouter.Handle("/books/{id}", isAuthorized(returnSingleBook))
+	myRouter.Handle("/", promhttp.InstrumentHandlerCounter(httpRequestsTotal, basicAuthentication(homePage))).Methods("GET")
+	myRouter.Handle("/books", promhttp.InstrumentHandlerCounter(httpRequestsTotal, isAuthorized(createNewBook))).Methods("POST")
+	myRouter.Handle("/books", promhttp.InstrumentHandlerCounter(httpRequestsTotal, isAuthorized(returnAllBooks))).Methods("GET")
+	myRouter.Handle("/books/{id}", promhttp.InstrumentHandlerCounter(httpRequestsTotal, isAuthorized(updateBook))).Methods("PUT")
+	myRouter.Handle("/books/{id}", promhttp.InstrumentHandlerCounter(httpRequestsTotal, isAuthorized(deleteBook))).Methods("DELETE")
+	myRouter.Handle("/books/{id}", promhttp.InstrumentHandlerCounter(httpRequestsTotal, isAuthorized(returnSingleBook))).Methods("GET")
+	myRouter.Handle("/metrics", promhttp.HandlerFor(r, promhttp.HandlerOpts{})).Methods(http.MethodGet)
 	log.Fatal(http.ListenAndServe(":10000", myRouter))
 }
 

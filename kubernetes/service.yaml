@@ -4,6 +4,10 @@ metadata:
   name: bookapi-svc
   labels:
     app: bookapi
+#  annotations:
+#    prometheus.io/scrape: "true"
+#    prometheus.io/path: /metrics
+#    prometheus.io/port: "8080"
 #    tier:
 spec:
   type: NodePort #ClusterIp / LoadBalancer

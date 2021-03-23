@@ -15,6 +15,10 @@ spec:
         app: bookapi
 #        role:
 #        tier:
+#      annotations:
+#        prometheus.io/scrape: "true"
+#        prometheus.io/path: /metrics
+#        prometheus.io/port: "8080"
 #      annotation:  #this is used when new version of app is going to be published
 #        kubernetes.io/change-cause: "Update to green kuard"
 #  minReadySeconds: 60 # this is the minimum amount of time to wait after seeing a pod become healthy before moving on to the next pod. this is inside spec:
@@ -30,4 +34,4 @@ spec:
 #              memory: 100Mi
 
           ports:
-            - containerPort: 80
+            - containerPort: 8080
