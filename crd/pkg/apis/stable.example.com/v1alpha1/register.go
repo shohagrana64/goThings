@@ -1,7 +1,7 @@
 package v1alpha1
 
 import (
-	stable "github.com/shohagrana64/crd/pkg/apis/stable.example.com"
+	stable "github.com/shohagrana64/goThings/crd/pkg/apis/stable.example.com"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
